@@ -93,24 +93,36 @@
             <v-card-title>
               <v-btn @click="isDialogOpen = true" variant="tonal" size="small">Adicionar usuário</v-btn
               >
-              <v-dialog v-model="isDialogOpen" >
+              <v-dialog v-model="isDialogOpen" width="600px">
                 
                 <v-card>
-                  <v-card-text> </v-card-text>
+                  <v-card-title>Adicionar Usúario</v-card-title>
+                 <v-card-text>
+                  <v-row>
+                    <v-col>
+                      <v-text-field label="Nome" variant="outlined"> </v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field 
+                      label="Email"
+                       variant="outlined"
+                       :rules="emailRules"> </v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-select label="Cargo" variant="outlined"
+                    :items="['Admin', 'Gerente', 'Convidado']">
+                  </v-select>
+                 </v-card-text>
+                 <v-card-actions>
+                  <v-spacer>
+                  </v-spacer>
+                  <v-btn variant="text" @click="isDialogOpen = false">Cancelar</v-btn>
+                  <v-btn variant="tonal" color="success">Enviar</v-btn>
+                 </v-card-actions>
                 </v-card>
               </v-dialog>
             </v-card-title>
-            <!-- <v-card-title>
-              <v-btn v-bind="props" variant="tonal" size="small"
-                >Adicionar usuário</v-btn
-              >
-              <v-dialog width="600px">
-                <template #activator="{ props }"> </template>
-                <v-card>
-                  <v-card-text> </v-card-text>
-                </v-card>
-              </v-dialog>
-            </v-card-title> -->
+
 
           </div>
           <v-table>
@@ -298,6 +310,14 @@ import { ref } from "vue";
 
 const isDrawerOpen = ref(false);
 const isDialogOpen = ref(false);
+const emailRules = [
+  value => {
+    if(value) {
+      return true;
+    } 
+      return 'O email é obrigatorio';
+    }
+];
 </script>
 
 
